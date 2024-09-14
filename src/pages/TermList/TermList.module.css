@@ -1,0 +1,52 @@
+.TermListModule{
+    border: 2px solid var(--edge);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    margin: 20px;
+    padding: 10px;
+}
+
+.TermListTable{
+    display: flex;
+    flex-direction: row;
+}
+
+.TermButton{
+    margin: 5px;
+    border: 2px solid var(--edge);
+    background-color: var(--void);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    color: var(--white);
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    font-size: 20px;
+    font-family: 'Noticia Text';
+}
+.DisabledTermButton{
+    margin: 5px;
+    border: 2px solid var(--edge);
+    background-color: var(--void);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    color: var(--edge);
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+
+    font-size: 20px;
+    font-family: 'Noticia Text';
+}
+.TermButton:hover,
+.SelectedTerm{
+    border-color: var(--theme);
+    color: var(--theme);
+}

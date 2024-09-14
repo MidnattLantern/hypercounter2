@@ -1,0 +1,22 @@
+.ExponentSelectionMenuModule{
+    width: 50px;
+}
+
+.ThemeText{
+    font-family: var(--theme-font);
+}
+
+.ExponentOption{
+    margin: 0px;
+    padding: 10px;
+    border: 1px solid var(--edge);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    background-color: var(--dark);
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+}
+.ExponentOption:hover{
+    background-color: var(--theme);
+}
