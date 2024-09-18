@@ -1,0 +1,32 @@
+.ScrollPilotModule{
+    border: 1px solid var(--theme);
+    width: 250px;
+    height: 250px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SomeDiv{
+    position: relative;
+}
+
+.SomeContent{
+    min-width: 50px;
+    min-height: 50px;
+    background-color: var(--edge);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.HighlightBox{
+    border: 1px solid red;
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    width: 250px;
+    min-height: 50px;
+    pointer-events: none;
+}
