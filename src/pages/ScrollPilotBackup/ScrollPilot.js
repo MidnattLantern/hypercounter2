@@ -1,22 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Styles from "./ScrollPilot.module.css";
 import "../../global.css";
-import ScrollButtons from "./ScrollButtons";
-import useScrollSnap from "./useScrollSnap";
 
-const ScrollPilot = ({setGlobalValue1}) => {
-    const { scrollContainerRef, selectedContent } = useScrollSnap();
-
-    useEffect(() => {
-        setGlobalValue1(selectedContent)
-    }, [selectedContent, setGlobalValue1]);
-
-//    const scrollContainerRef = useRef(null); // To reference the <div>
-//    const [selectedContent, setSelectedContent] = useState(null);
+const ScrollPilot = () => {
+    const scrollContainerRef = useRef(null); // To reference the <div>
+    const [selectedContent, setSelectedContent] = useState(null);
 
 
     // Function to handle the snapping logic
-/*    const handleScroll = () => {
+    const handleScroll = () => {
         if (scrollContainerRef.current) { // save resources if this DOM doesn't exist
 
             // Get the container's scroll position and size
@@ -62,20 +54,21 @@ const ScrollPilot = ({setGlobalValue1}) => {
                 console.log("assign:", closestBox.id);
                 setSelectedContent(closestBox.id);
             }
-        }
-    };*/
 
-/*    useEffect(() => {
+        };
+    };
+
+    useEffect(() => {
         //keyboard
         const handleKeyDown = (event) => {
             switch (event.key) {
                 case "ArrowUp":
                     event.preventDefault();
-                    scrollBy50Pixels(-1);
+                    scrollUpBy50Pixels();
                     break;
                 case "ArrowDown":
                     event.preventDefault();
-                    scrollBy50Pixels(1);
+                    scrollBy50Pixels();
                     break;
                 default:
                     break;
@@ -110,12 +103,21 @@ const ScrollPilot = ({setGlobalValue1}) => {
                 clearTimeout(timeoutId); // Clean up the timeout when the component unmounts
             }
         };
-    }, []);*/
+    }, []);
 
-    const scrollBy50Pixels = (direction) => {
+    const scrollBy50Pixels = () => {
         if (scrollContainerRef.current) {
             scrollContainerRef.current.scrollBy({
-                top: direction * 52, // 52 instead of 50 for CSS
+                top: 52, // 52 instead of 50 for CSS
+                behavior: "smooth",
+            })
+        };
+    };
+
+    const scrollUpBy50Pixels = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({
+                top: -52, // 52 instead of 50 for CSS
                 behavior: "smooth",
             })
         };
@@ -127,18 +129,22 @@ const ScrollPilot = ({setGlobalValue1}) => {
         <div ref={scrollContainerRef} className={Styles.ScrollPilotModule}>
             <div className={Styles.SomeContent}/>
             <div className={Styles.SomeContent}/>
-
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(id => (
-                <div key={id} id={id} className={Styles.SomeContent}>
-                    <p>{`t${id}`}</p>
-                </div>
-            ))}
-
+            <div id={1} className={Styles.SomeContent}><p>t1</p></div>
+            <div id={2} className={Styles.SomeContent}><p>t2</p></div>
+            <div id={3} className={Styles.SomeContent}><p>t3</p></div>
+            <div id={4} className={Styles.SomeContent}><p>t4</p></div>
+            <div id={5} className={Styles.SomeContent}><p>t5</p></div>
+            <div id={6} className={Styles.SomeContent}><p>t6</p></div>
+            <div id={7} className={Styles.SomeContent}><p>t7</p></div>
             <div className={Styles.SomeContent}/>
             <div className={Styles.SomeContent}/>
         </div>
         <div className={Styles.HighlightBox}/>
-        <ScrollButtons onScrollUp={() => scrollBy50Pixels(-1)} onScrollDown={() => scrollBy50Pixels(1)} />
+
+        <div className={Styles.ScrollButtonContainer}>
+            <button className={Styles.ScrollButton} onClick={scrollUpBy50Pixels}>↑</button>
+            <button className={Styles.ScrollButton} onClick={scrollBy50Pixels}>↓</button>
+        </div>
     </div>
 
     <p>selected content: {selectedContent}</p>

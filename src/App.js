@@ -1,11 +1,11 @@
 import TermManager from "./pages/TermManager";
-import ScrollPilot from "./pages/ScrollPilot/ScrollPilot";
+import ScrollPilotProvider from "./pages/ScrollPilot/ScrollPilotProvider";
 
 function App() {
   return (
     <div>
       <TermManager />
-      <ScrollPilot />
+      <ScrollPilotProvider />
     </div>
   );
 }

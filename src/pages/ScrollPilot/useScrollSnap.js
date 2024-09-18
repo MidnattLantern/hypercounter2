@@ -1,22 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Styles from "./ScrollPilot.module.css";
-import "../../global.css";
-import ScrollButtons from "./ScrollButtons";
-import useScrollSnap from "./useScrollSnap";
 
-const ScrollPilot = ({setGlobalValue1}) => {
-    const { scrollContainerRef, selectedContent } = useScrollSnap();
+const useScrollSnap = () => {
+    const scrollContainerRef = useRef(null);
+    const [selectedContent, setSelectedContent] = useState(null);
 
-    useEffect(() => {
-        setGlobalValue1(selectedContent)
-    }, [selectedContent, setGlobalValue1]);
-
-//    const scrollContainerRef = useRef(null); // To reference the <div>
-//    const [selectedContent, setSelectedContent] = useState(null);
-
-
-    // Function to handle the snapping logic
-/*    const handleScroll = () => {
+    const handleScroll = () => {
         if (scrollContainerRef.current) { // save resources if this DOM doesn't exist
 
             // Get the container's scroll position and size
@@ -63,9 +52,9 @@ const ScrollPilot = ({setGlobalValue1}) => {
                 setSelectedContent(closestBox.id);
             }
         }
-    };*/
+    };
 
-/*    useEffect(() => {
+    useEffect(() => {
         //keyboard
         const handleKeyDown = (event) => {
             switch (event.key) {
@@ -110,7 +99,7 @@ const ScrollPilot = ({setGlobalValue1}) => {
                 clearTimeout(timeoutId); // Clean up the timeout when the component unmounts
             }
         };
-    }, []);*/
+    }, []);
 
     const scrollBy50Pixels = (direction) => {
         if (scrollContainerRef.current) {
@@ -121,28 +110,7 @@ const ScrollPilot = ({setGlobalValue1}) => {
         };
     };
 
-    return (<>
-
-    <div className={Styles.SomeDiv}>
-        <div ref={scrollContainerRef} className={Styles.ScrollPilotModule}>
-            <div className={Styles.SomeContent}/>
-            <div className={Styles.SomeContent}/>
-
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(id => (
-                <div key={id} id={id} className={Styles.SomeContent}>
-                    <p>{`t${id}`}</p>
-                </div>
-            ))}
-
-            <div className={Styles.SomeContent}/>
-            <div className={Styles.SomeContent}/>
-        </div>
-        <div className={Styles.HighlightBox}/>
-        <ScrollButtons onScrollUp={() => scrollBy50Pixels(-1)} onScrollDown={() => scrollBy50Pixels(1)} />
-    </div>
-
-    <p>selected content: {selectedContent}</p>
-    </>);
+    return { scrollContainerRef, selectedContent };
 };
 
-export default ScrollPilot;
+export default useScrollSnap;
