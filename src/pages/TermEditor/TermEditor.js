@@ -60,7 +60,7 @@ const TermEditor = ({ focusTermCoefficient, focusTermVariable, focusTermExponent
                 </>)}
             </div>
         </>)
-    }
+    };
 
     const TermEditorWindow = () => {
         return(<>
