@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Styles from "./ScrollPilot.module.css";
 
-const useScrollSnap = () => {
-    const scrollContainerRef = useRef(null);
+const useScrollSnap = ({snapToCell}) => {
+    const scrollContainerRef = useRef(null); 
     const [selectedContent, setSelectedContent] = useState(null);
 
     const handleScroll = () => {
@@ -55,6 +55,10 @@ const useScrollSnap = () => {
     };
 
     useEffect(() => {
+
+//        scrollBy50Pixels(3.1); // automatically snap to third cell, which would be neutral
+        scrollBy50Pixels(snapToCell);
+
         //keyboard
         const handleKeyDown = (event) => {
             switch (event.key) {

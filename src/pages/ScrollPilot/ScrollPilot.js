@@ -5,7 +5,9 @@ import ScrollButtons from "./ScrollButtons";
 import useScrollSnap from "./useScrollSnap";
 
 const ScrollPilot = ({setGlobalValue1}) => {
-    const { scrollContainerRef, selectedContent } = useScrollSnap();
+    const snapToCellValue = 3.1; // snap to neutral upon opening
+
+    const { scrollContainerRef, selectedContent } = useScrollSnap({ snapToCell: snapToCellValue });
 
     useEffect(() => {
         setGlobalValue1(selectedContent)
@@ -128,9 +130,9 @@ const ScrollPilot = ({setGlobalValue1}) => {
             <div className={Styles.SomeContent}/>
             <div className={Styles.SomeContent}/>
 
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(id => (
+            {[10, 3, 2, 1, 0, -1].map(id => (
                 <div key={id} id={id} className={Styles.SomeContent}>
-                    <p>{`t${id}`}</p>
+                    <p>{`${id}`}</p>
                 </div>
             ))}
 

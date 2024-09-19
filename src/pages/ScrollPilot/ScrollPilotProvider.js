@@ -27,7 +27,8 @@ const ScrollPilotProvider = () => {
     <p>globalValue2: {globalValue2}</p>
     <p>globalValue3: {globalValue3}</p>
 
-        {renderFocusedComponent()}
+    {renderFocusedComponent()}
+
         <button onClick={() => {setFocusPilot(1)}}>component 1</button>
         <button onClick={() => {setFocusPilot(2)}}>component 2</button>
         <button onClick={() => {setFocusPilot(3)}}>component 3</button>
