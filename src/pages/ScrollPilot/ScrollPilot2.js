@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Styles from "./ScrollPilot.module.css";
 import "../../global.css";
-import ScrollButtons from "./ScrollButtons";
 import useScrollSnap from "./useScrollSnap";
 
 const ScrollPilot2 = ({setGlobalValue2}) => {
@@ -22,6 +21,15 @@ const ScrollPilot2 = ({setGlobalValue2}) => {
         };
     };
 
+    const scrollButtons = () => {
+        return (<>
+            <div className={`${Styles.ScrollButtonContainer}`}>
+                <button className={Styles.ScrollButton} onClick={() => {scrollBy50Pixels(-1)}}>↑</button>
+                <button className={Styles.ScrollButton} onClick={() => {scrollBy50Pixels(1)}}>↓</button>
+            </div>
+        </>);
+    };
+
     return (<>
 
     <div className={Styles.SomeDiv}>
@@ -39,7 +47,7 @@ const ScrollPilot2 = ({setGlobalValue2}) => {
             <div className={Styles.SomeContent}/>
         </div>
         <div className={Styles.HighlightBox}/>
-        <ScrollButtons onScrollUp={() => scrollBy50Pixels(-1)} onScrollDown={() => scrollBy50Pixels(1)} />
+        {scrollButtons()}
     </div>
 
 

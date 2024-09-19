@@ -1,10 +1,51 @@
 .SomeDiv{
     position: relative;
     margin: 10px;
+    pointer-events: none;
 }
 
+.ScrollPilotProviderModule{
+    border: 1px solid rgba(0,0,0,0);
+    position: relative;
+    height: 300px;
+}
+    .ItemContainer{
+        border: 2px solid var(--edge);
+        border-left-width: 5px;
+        border-right-width: 5px;
+        display: flex;
+        flex-direction: row;
+        width: 250px;
+        height: 250px;
+        align-items: center;
+        justify-content: space-around;
+
+        margin: 10px;
+        position: absolute;
+        top: 0px;
+    }
+        .ItemProvider{
+            border: 2px solid var(--edge);
+            border-left-width: 5px;
+            border-right-width: 5px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ItemProvider:hover{
+            border-color: var(--theme);
+        }
+        .ItemProviderActive{
+            z-index: 9;
+            border-color: var(--off-white);
+            color: rgba(0,0,0,0);
+            pointer-events: none;
+        }
+
 .ScrollPilotModule{
-    border: 2px solid var(--theme);
+    border: 2px solid rgba(0,0,0,0);
     border-left-width: 5px;
     border-right-width: 5px;
     width: 250px;
@@ -24,11 +65,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: all;    
+}
+.AlignForCoefficient{
+    position: relative;
+    left: -84px;
+}
+.AlignForExponent{
+    position: relative;
+    left: 84px;
 }
 
 .HighlightBox{
-    border-top: 2px solid var(--theme);
-    border-bottom: 2px solid var(--theme);
+    border-top: 2px hidden var(--off-white);
+    border-bottom: 2px hidden var(--off-white);
     position: absolute;
     top: 98px;
     left: 5px;
@@ -40,14 +90,20 @@
 .ScrollButtonContainer{
     pointer-events: none;
     position: absolute;
-    width: 250px;
+    width: 50px;
     height: 250px;
     top: 1px;
-    left: 5px;
+    left: 105px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+.AlignScrollButtonForCoefficient{
+    left: 21px;
+}
+.AlignScrollButtonForExponent{
+    left: 189px;
 }
 .ScrollButton{
     pointer-events: all;
@@ -61,7 +117,7 @@
     border-radius: 100%;
 }
 .ScrollButton:hover{
-    border: 1.5px solid var(--theme);
-    color: var(--theme);
+    border: 1.5px solid var(--off-white);
+    color: var(--off-white);
     cursor: pointer;
 }

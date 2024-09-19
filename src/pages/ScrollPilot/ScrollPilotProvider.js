@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ScrollPilot from "./ScrollPilot";
 import ScrollPilot2 from "./ScrollPilot2";
 import ScrollPilot3 from "./ScrollPilot3";
+import Styles from "./ScrollPilot.module.css";
 
 const ScrollPilotProvider = () => {
     const [globalValue1, setGlobalValue1] = useState(null);
@@ -18,7 +19,7 @@ const ScrollPilotProvider = () => {
             case 3:
                 return <ScrollPilot3 setGlobalValue3={setGlobalValue3}/>;
             default:
-                return <p>Select a component</p>
+                return null
         }
     }
 
@@ -27,13 +28,16 @@ const ScrollPilotProvider = () => {
     <p>globalValue2: {globalValue2}</p>
     <p>globalValue3: {globalValue3}</p>
 
-    {renderFocusedComponent()}
+    <div className={Styles.ScrollPilotProviderModule}>
+        <div className={Styles.ItemContainer}>
+            <p className={`${Styles.ItemProvider} ${focusPilot === 1 ? Styles.ItemProviderActive : null}`} onClick={() => {setFocusPilot(1)}}>{globalValue1}</p>
+            <p className={`${Styles.ItemProvider} ${focusPilot === 2 ? Styles.ItemProviderActive : null}`} onClick={() => {setFocusPilot(2)}}>{globalValue2}</p>
+            <p className={`${Styles.ItemProvider} ${focusPilot === 3 ? Styles.ItemProviderActive : null}`} onClick={() => {setFocusPilot(3)}}>{globalValue3}</p>
+        </div>
+        {renderFocusedComponent()}
+    </div>
 
-        <button onClick={() => {setFocusPilot(1)}}>component 1</button>
-        <button onClick={() => {setFocusPilot(2)}}>component 2</button>
-        <button onClick={() => {setFocusPilot(3)}}>component 3</button>
-        <button onClick={() => {setFocusPilot(null)}}>close</button>
-    
+    <button onClick={() => {setFocusPilot(null)}}>close</button>
     </>)
 };
 
