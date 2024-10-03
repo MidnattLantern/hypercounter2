@@ -1,7 +1,8 @@
 .TermListModule{
-    border: 2px solid var(--edge);
-    border-left-width: 5px;
-    border-right-width: 5px;
+    background-color: var(--dark);
+    border: 1px solid var(--edge);
+    border-left-width: 3px;
+    border-right-width: 3px;
     margin: 20px;
     padding: 10px;
 }
@@ -13,10 +14,6 @@
 
 .TermButton{
     margin: 5px;
-    border: 2px solid var(--edge);
-    background-color: var(--void);
-    border-left-width: 5px;
-    border-right-width: 5px;
     color: var(--white);
     width: 150px;
     height: 50px;
@@ -30,10 +27,6 @@
 }
 .DisabledTermButton{
     margin: 5px;
-    border: 2px solid var(--edge);
-    background-color: var(--void);
-    border-left-width: 5px;
-    border-right-width: 5px;
     color: var(--edge);
     width: 150px;
     height: 50px;
@@ -45,8 +38,10 @@
     font-size: 20px;
     font-family: 'Noticia Text';
 }
-.TermButton:hover,
-.SelectedTerm{
-    border-color: var(--theme);
-    color: var(--theme);
+.SelectedTerm,
+.SelectedTerm:hover{
+    color: var(--white-offset);
+    box-shadow: none;
+    animation: none;
+    cursor: default;
 }

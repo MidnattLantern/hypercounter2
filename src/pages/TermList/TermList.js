@@ -2,7 +2,6 @@
 import React from "react";
 //styles
 import Styles from "./TermList.module.css";
-import "../../global.css";
 
 const TermList = ({focusTermIndex, expressionArray, handleCreateTerm, handleSelectTerm, handleEraseTerm}) => {
 

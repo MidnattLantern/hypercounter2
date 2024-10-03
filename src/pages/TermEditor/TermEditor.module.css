@@ -1,8 +1,9 @@
 /* --- Foundations --- */
 .TermEditorModule{
-    border: 2px solid var(--edge);
-    border-left-width: 5px;
-    border-right-width: 5px;
+/*    background-color: var(--dark);*/
+    border: 1px solid var(--edge);
+    border-left-width: 3px;
+    border-right-width: 3px;
     margin: 20px;
     padding: 20px;
     display: flex;
