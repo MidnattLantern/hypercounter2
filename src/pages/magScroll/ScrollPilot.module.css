@@ -44,6 +44,8 @@
     overflow-x: hidden;
     transition: height 0.5s ease, border-color 0.5s ease, visibility 0.5s ease;
     visibility: visible;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 .LoadingContainer{
     border: 1px solid var(--edge);

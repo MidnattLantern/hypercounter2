@@ -2,8 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Styles from "./ScrollPilot.module.css";
 import { ReactComponent as HighLighterAsset } from "../../assets/highlighter.svg";
 import { ReactComponent as ClearIcon} from "../../assets/clear-icon.svg";
+import { useExpression } from "../../context/ExpressionContext";
 
-const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, setMemoryIndex, library }) => {
+const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, setMemoryIndex, library }) => {
+    const { expressionArray, addTerm, editTerm, deleteTerm } = useExpression();
     const [hasLoaded, setHasLoaded] = useState(false);
     const [showHighlighter, setShowHighlighter] = useState(false);
     const [localValue, setLocalValue] = useState(null);
@@ -23,7 +25,10 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, setMemoryIndex, l
 //        console.log("local value:", localValue);
         setGlobalValue(value);
         setMemoryIndex(index);
-    }, [setGlobalValue, setMemoryIndex,]);
+
+        editTerm(selectedIndex, value);
+
+    }, [setGlobalValue, setMemoryIndex, editTerm, selectedIndex]);
 
     const handleScroll = useCallback(() => {
         if (scrollContainerRef.current) {
@@ -87,6 +92,7 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, setMemoryIndex, l
     }, [globalValue, handleScroll, hasLoaded, library, localValue, scrollToValue, handleSetValue, memoryIndex]);
 
     return(<>
+
         <div ref={scrollContainerRef} className={`${hasLoaded ? Styles.AlignScrollContainer : Styles.LoadingContainer}`}>
 
             <div className={Styles.HighlighterFrame}>
@@ -115,9 +121,11 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, setMemoryIndex, l
 
                 <button className={Styles.LibraryItem}/>
                 <button className={Styles.LibraryItem}/>
+
                 </div>
         </> : null}
         </div>
+
     </>)
 };
 

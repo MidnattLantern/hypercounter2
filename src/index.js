@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ExpressionProvider } from './context/ExpressionContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ExpressionProvider>
+      <App />
+    </ExpressionProvider>
   </React.StrictMode>
 );
 
