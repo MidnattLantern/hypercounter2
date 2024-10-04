@@ -26,20 +26,9 @@ const TermList = ({focusTermIndex, expressionArray, handleCreateTerm, handleSele
           tabIndex="-1"
           className={`${Styles.TermButton} ${focusTermIndex === entity.term_index ? Styles.SelectedTerm : null}`}
           onClick={() =>
-          {handleSelectTerm(
-            entity.term_coefficient,
-            entity.term_variable,
-            entity.term_exponent,
-            entity.term_index
-          )}}
-          >
+          {handleSelectTerm(entity.term_index)}}>
 
-        {entity.term_coefficient},
-        {entity.term_variable},
-        {entity.term_exponent},
-        {entity.scroll_memory_coefficient},
-        {entity.scroll_memory_variable},
-        {entity.scroll_memory_exponent}
+        {entity.term_coefficient}{entity.term_variable}^{entity.term_exponent} | {entity.scroll_memory_coefficient} {entity.scroll_memory_variable} {entity.scroll_memory_exponent}
 
           </button>
 

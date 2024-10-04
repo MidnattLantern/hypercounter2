@@ -31,6 +31,9 @@ const MagScrollProvider = ({
                 setLocalCoefficient(term.term_coefficient);
                 setLocalVariable(term.term_variable);
                 setLocalExponent(term.term_exponent);
+                setLocalScrollMemoryCoefficient(term.scroll_memory_coefficient);
+                setLocalScrollMemoryVariable(term.scroll_memory_variable);
+                setLocalScrollMemoryExponent(term.scroll_memory_exponent);
                 setHasLoaded(true);
             };
         };
@@ -54,8 +57,7 @@ const MagScrollProvider = ({
             scroll_memory_variable: localScrollMemoryVariable,
             scroll_memory_exponent: localScrollMemoryExponent,
         })
-        console.log("sync with global provider")
-    }
+    };
 
     const handlesetLocalCoefficient = async (value) => {
         await setLocalCoefficient(value);
@@ -95,8 +97,6 @@ const MagScrollProvider = ({
     };
 
     return(hasLoaded ? <>
-
-    <p>focusTermIndex: {focusTermIndex}</p>
 
             <div>
                 <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(1)}}>{localCoefficient}</button>
