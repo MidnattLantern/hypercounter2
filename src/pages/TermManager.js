@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import TermEditor from "./TermEditor/TermEditor";
 import TermList from "./TermList/TermList";
 import { v4 as uuidv4 } from 'uuid'; // convenient for term index
 import { useExpression } from "../context/ExpressionContext";
+import MagScrollProvider from "./magScroll/MagScrollProvider";
 
 const TermManager = () => {
     const newTermIndex = uuidv4();
-    const [focusTermCoefficient,setFocusTermCoefficient] = useState(null);
-    const [focusTermVariable, setFocusTermVariable] = useState(null);
-    const [focusTermExponent, setFocusTermExponent] = useState(null);
     const [focusTermIndex, setFocusTermIndex] = useState(null);
   const { expressionArray, addTerm, editTerm, deleteTerm } = useExpression();
 
@@ -24,35 +21,27 @@ const handleCreateTerm = () => {
   };
   addTerm(newTerm);
 
-  setFocusTermCoefficient(1);
-  setFocusTermVariable("");
-  setFocusTermExponent(1);
   setFocusTermIndex(newTermIndex);
 };
-  
-    useEffect(() => {
-        setFocusTermCoefficient(focusTermCoefficient);
-        setFocusTermVariable(focusTermVariable);
-        setFocusTermExponent(focusTermExponent);
-    }, [focusTermCoefficient, focusTermVariable, focusTermExponent]);
 
-      const handleEditTerm = (target, updatedTerm) => {
-        editTerm(target, updatedTerm)
+      const handleEditTermTest1 = (target) => {
+        editTerm(target, {
+          term_coefficient: 2,
+          term_variable: "x", 
+          term_exponent: 10,
+          scroll_memory_coefficient: 1,
+          scroll_memory_variable: 2,
+          scroll_memory_exponent: 3
+        })
       };
-
   
-      const handleSelectTerm = (targetCoefficient, targetValue, targetExponent, targetIndex) => {
-        setFocusTermCoefficient(targetCoefficient);
-        setFocusTermVariable(targetValue);
-        setFocusTermExponent(targetExponent);
+      const handleSelectTerm = async (targetCoefficient, targetValue, targetExponent, targetIndex) => {
+        await setFocusTermIndex(null); // deselect
         setFocusTermIndex(targetIndex);
       };
 
       const handleEraseTerm = (target) => {
-        deleteTerm(target)
-        setFocusTermCoefficient(null);
-        setFocusTermVariable(null);
-        setFocusTermExponent(null);
+        deleteTerm(target);
         setFocusTermIndex(null);
       }
 
@@ -66,14 +55,10 @@ const handleCreateTerm = () => {
         handleEraseTerm={handleEraseTerm}
         />
 
+        <p>focusTermIndex: {focusTermIndex}</p>
 
-        <TermEditor
-        focusTermCoefficient={focusTermCoefficient}
-        focusTermVariable={focusTermVariable}
-        focusTermExponent={focusTermExponent}
-        focusTermIndex={focusTermIndex}
-        handleEditTerm={handleEditTerm}
-        />
+      {focusTermIndex !== null ? <MagScrollProvider focusTermIndex={focusTermIndex}/> : null}
+        
 
     </>)
 };

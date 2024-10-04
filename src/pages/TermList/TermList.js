@@ -34,7 +34,12 @@ const TermList = ({focusTermIndex, expressionArray, handleCreateTerm, handleSele
           )}}
           >
 
-        {entity.term_coefficient}{entity.term_variable}^{entity.term_exponent}
+        {entity.term_coefficient},
+        {entity.term_variable},
+        {entity.term_exponent},
+        {entity.scroll_memory_coefficient},
+        {entity.scroll_memory_variable},
+        {entity.scroll_memory_exponent}
 
           </button>
 

@@ -5,12 +5,11 @@ import { ReactComponent as ClearIcon} from "../../assets/clear-icon.svg";
 import { useExpression } from "../../context/ExpressionContext";
 
 const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, setMemoryIndex, library }) => {
-    const { expressionArray, addTerm, editTerm, deleteTerm } = useExpression();
+    const { editTerm } = useExpression();
     const [hasLoaded, setHasLoaded] = useState(false);
     const [showHighlighter, setShowHighlighter] = useState(false);
     const [localValue, setLocalValue] = useState(null);
     const [localLibrary, setLocalLibrary] = useState([]);
-//    const [scrollLocation, setScrollLocation] = useState(0);
     const scrollContainerRef = useRef(null);
     const localLibraryItemsRef = useRef([]);
     const [scrollToValue, setScrollToValue] = useState(true);
@@ -18,11 +17,9 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
     const handleSetValue = useCallback((value, index) => {
         const scrollableDiv = document.getElementById((index - 2).toString());
         if (scrollableDiv) {
-//            console.log("scrollableDiv",scrollableDiv);
             scrollableDiv.scrollIntoView({behavior: "smooth"})
         };
         setLocalValue(value);
-//        console.log("local value:", localValue);
         setGlobalValue(value);
         setMemoryIndex(index);
 
@@ -83,13 +80,22 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
         if (library.length !== 0) {
             setLocalLibrary(library);
         } else {
-            setLocalLibrary([null]); // better to have a null item than nothing at all
+            setLocalLibrary([null]);
         };
 
         setLocalValue(globalValue);
         setHasLoaded(true);
 
-    }, [globalValue, handleScroll, hasLoaded, library, localValue, scrollToValue, handleSetValue, memoryIndex]);
+    }, [
+        globalValue,
+        handleScroll,
+        hasLoaded,
+        library,
+        localValue,
+        scrollToValue,
+        handleSetValue,
+        memoryIndex
+    ]);
 
     return(<>
 

@@ -3,48 +3,39 @@ import { useEffect, useState } from "react";
 import MagScroll from "./MagScroll";
 import { ReactComponent as ProviderDecoratorLeft} from "../../assets/provider-decorator-left.svg";
 import { ReactComponent as ProviderDecoratorRight} from "../../assets/provider-decorator-right.svg";
+import { useExpression } from "../../context/ExpressionContext";
 
 const MagScrollProvider = ({
-    selectedCoefficient,
-    setSelectedCoefficient,
-    memoryIndex1,
-    setMemoryIndex1,
-
-    selectedVariable,
-    setSelectedVariable,
-    memoryIndex2,
-    setMemoryIndex2,
-
-    selectedExponent,
-    setSelectedExponent,
-    memoryIndex3,
-    setMemoryIndex3,
-
-    selectedIndex
+    focusTermIndex,
 }) => {
+    const { expressionArray, editTerm } = useExpression();
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [globalValue1, setGlobalValue1] = useState(null);
-    const [globalValue2, setGlobalValue2] = useState(null);
-    const [globalValue3, setGlobalValue3] = useState(null);
-//    const [memoryIndex1, setMemoryIndex1] = useState(3);
-//    const [memoryIndex2, setMemoryIndex2] = useState(0);
-//    const [memoryIndex3, setMemoryIndex3] = useState(2);
+    const [localCoefficient, setLocalCoefficient] = useState(null);
+    const [localVariable, setLocalVariable] = useState(null);
+    const [localExponent, setLocalExponent] = useState(null);
+    const [localScrollMemoryCoefficient, setLocalScrollMemoryCoefficient] = useState(3);
+    const [localScrollMemoryVariable, setLocalScrollMemoryVariable] = useState(0);
+    const [localScrollMemoryExponent, setLocalScrollMemoryExponent] = useState(2);
     const [focusPilot, setFocusPilot] = useState(null);
     const library1 = [10, 3, 2, 1, 0, -1];
     const library2 = [null, "♦️", "♥️", "♠️", "♣️"];
     const library3  = [3, 2, 1, -1];
 
     useEffect(() => {
-
-
         const handleMount = () => {
-            setGlobalValue1(selectedCoefficient);
-            setGlobalValue2(selectedVariable);
-            setGlobalValue3(selectedExponent);
-            setHasLoaded(true);
-        }
+            if (!hasLoaded) {
+                const findTermByIndex = () => {
+                    return expressionArray.find(term => term.term_index === focusTermIndex);
+                    };
+                const term = findTermByIndex(focusTermIndex);
+                setLocalCoefficient(term.term_coefficient);
+                setLocalVariable(term.term_variable);
+                setLocalExponent(term.term_exponent);
+                setHasLoaded(true);
+            };
+        };
         handleMount();
-    }, [selectedCoefficient, selectedVariable, selectedExponent]);
+    }, [expressionArray, focusTermIndex, hasLoaded]);
 
     const handleUnselect = () => {
         setFocusPilot(null);
@@ -54,48 +45,49 @@ const MagScrollProvider = ({
         setFocusPilot(target);
     };
 
-    const handleSetGlobalValue1 = (value) => {
-        setGlobalValue1(value);
-        setSelectedCoefficient(value);
-    };
-    const handleSetGlobalValue2 = (value) => {
-        setGlobalValue2(value);
-        setSelectedVariable(value);
-    };
-    const handleSetGlobalValue3 = (value) => {
-        setGlobalValue3(value);
-        setSelectedExponent(value);
-    };
+    const synWithGlobalContext = async () => {
+        await editTerm(focusTermIndex, {
+            term_coefficient: localCoefficient,
+            term_variable: localVariable,
+            term_exponent: localExponent,
+            scroll_memory_coefficient: localScrollMemoryCoefficient,
+            scroll_memory_variable: localScrollMemoryVariable,
+            scroll_memory_exponent: localScrollMemoryExponent,
+        })
+        console.log("sync with global provider")
+    }
 
-//    const [tableData, setTableData] = useState([]);
-
-    /*
-    const handleSubmit = () => {
-
-        const jsonData = [
-            { Key: 'globalValue1', Value: globalValue1 },
-            { Key: 'globalValue2', Value: globalValue2 },
-            { Key: 'globalValue3', Value: globalValue3 },
-        ];
-
-        setTableData(jsonData);
-        console.log("Submitted data:", tableData);
+    const handlesetLocalCoefficient = async (value) => {
+        await setLocalCoefficient(value);
+        synWithGlobalContext();
     };
-    */
+    const handlesetLocalVariable = async (value) => {
+        await setLocalVariable(value);
+        synWithGlobalContext();
+    };
+    const handlesetLocalExponent = async (value) => {
+        await setLocalExponent(value);
+        synWithGlobalContext();
+    };
+    const handleClose = () => {
+        setFocusPilot(null);
+        handleSetFocusPilot(0);
+    }
+    
 
     const renderFocusedComponent = () => {
         switch(focusPilot){
             case 1:
                 return(
-                    <MagScroll globalValue={globalValue1} setGlobalValue={handleSetGlobalValue1} memoryIndex={memoryIndex1} setMemoryIndex={setMemoryIndex1} library={library1} selectedIndex={selectedIndex}/>
+                    <MagScroll globalValue={localCoefficient} setGlobalValue={handlesetLocalCoefficient} memoryIndex={localScrollMemoryCoefficient} setMemoryIndex={setLocalScrollMemoryCoefficient} library={library1} />
                 );
             case 2:
                 return(
-                    <MagScroll globalValue={globalValue2} setGlobalValue={handleSetGlobalValue2} memoryIndex={memoryIndex2} setMemoryIndex={setMemoryIndex2} library={library2} selectedIndex={selectedIndex}/>
+                    <MagScroll globalValue={localVariable} setGlobalValue={handlesetLocalVariable} memoryIndex={localScrollMemoryVariable} setMemoryIndex={setLocalScrollMemoryVariable} library={library2} />
                 );
             case 3:
                 return(
-                    <MagScroll globalValue={globalValue3} setGlobalValue={handleSetGlobalValue3} memoryIndex={memoryIndex3} setMemoryIndex={setMemoryIndex3} library={library3} selectedIndex={selectedIndex}/>
+                    <MagScroll globalValue={localExponent} setGlobalValue={handlesetLocalExponent} memoryIndex={localScrollMemoryExponent} setMemoryIndex={setLocalScrollMemoryExponent} library={library3} />
                 );
             default:
                 return <div className={Styles.UnselectedContainer}></div>;
@@ -104,11 +96,13 @@ const MagScrollProvider = ({
 
     return(hasLoaded ? <>
 
+    <p>focusTermIndex: {focusTermIndex}</p>
+
             <div>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(1)}}>{globalValue1}</button>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(2)}}>{globalValue2 !== ""  ? globalValue2 : <>-</>}</button>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(3)}}>{globalValue3}</button>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(0)}}>Close</button>
+                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(1)}}>{localCoefficient}</button>
+                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(2)}}>{localVariable !== ""  ? localVariable : <>-</>}</button>
+                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(3)}}>{localExponent}</button>
+                <button className={Styles.SelectLibraryButton} onClick={() => {handleClose()}}>Close</button>
             </div>
 
             <div className={Styles.ProviderContainer}>
@@ -116,6 +110,14 @@ const MagScrollProvider = ({
                     {renderFocusedComponent()}
                 <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorRight className={Styles.ProviderContainerDecorator} /></div>
             </div>
+
+            <p>localCoefficient: {localCoefficient}</p>
+            <p>localVariable: {localVariable}</p>
+            <p>localExponent: {localExponent}</p>
+
+            <p>localScrollMemoryCoefficient: {localScrollMemoryCoefficient}</p>
+            <p>localScrollMemoryVariable: {localScrollMemoryVariable}</p>
+            <p>localScrollMemoryExponent: {localScrollMemoryExponent}</p>
 
     </> : <p>loading</p>)
 };
