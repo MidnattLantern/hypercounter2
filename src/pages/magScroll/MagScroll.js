@@ -20,11 +20,9 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
             scrollableDiv.scrollIntoView({behavior: "smooth"})
         };
         setLocalValue(value);
-        setGlobalValue(value);
+        setGlobalValue(value, index);
         setMemoryIndex(index);
-
         editTerm(selectedIndex, value);
-
     }, [setGlobalValue, setMemoryIndex, editTerm, selectedIndex]);
 
     const handleScroll = useCallback(() => {
@@ -88,13 +86,13 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
 
     }, [
         globalValue,
-        handleScroll,
-        hasLoaded,
         library,
+        memoryIndex,
+        handleScroll,
+        handleSetValue,
+        hasLoaded,
         localValue,
         scrollToValue,
-        handleSetValue,
-        memoryIndex
     ]);
 
     return(<>

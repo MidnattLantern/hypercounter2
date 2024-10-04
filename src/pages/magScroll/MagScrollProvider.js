@@ -22,8 +22,8 @@ const MagScrollProvider = ({
     const library3  = [3, 2, 1, -1];
 
     useEffect(() => {
-        const handleMount = () => {
-            if (!hasLoaded) {
+        if (!hasLoaded) {
+            const handleMount = () => {
                 const findTermByIndex = () => {
                     return expressionArray.find(term => term.term_index === focusTermIndex);
                     };
@@ -36,8 +36,8 @@ const MagScrollProvider = ({
                 setLocalScrollMemoryExponent(term.scroll_memory_exponent);
                 setHasLoaded(true);
             };
+            handleMount();
         };
-        handleMount();
     }, [expressionArray, focusTermIndex, hasLoaded]);
 
     const handleUnselect = () => {
@@ -48,8 +48,8 @@ const MagScrollProvider = ({
         setFocusPilot(target);
     };
 
-    const synWithGlobalContext = async () => {
-        await editTerm(focusTermIndex, {
+    const syncWithGlobalContext = () => {
+        editTerm(focusTermIndex, {
             term_coefficient: localCoefficient,
             term_variable: localVariable,
             term_exponent: localExponent,
@@ -59,23 +59,31 @@ const MagScrollProvider = ({
         })
     };
 
-    const handlesetLocalCoefficient = async (value) => {
+    const handlesetLocalCoefficient = async (value, index) => {
         await setLocalCoefficient(value);
-        synWithGlobalContext();
+        await editTerm(focusTermIndex, {
+            term_coefficient: value,
+            scroll_memory_coefficient: index,
+        })
     };
-    const handlesetLocalVariable = async (value) => {
+    const handlesetLocalVariable = async (value, index) => {
         await setLocalVariable(value);
-        synWithGlobalContext();
+        await editTerm(focusTermIndex, {
+            term_variable: value,
+            scroll_memory_variable: index,
+        })
     };
-    const handlesetLocalExponent = async (value) => {
+    const handlesetLocalExponent = async (value, index) => {
         await setLocalExponent(value);
-        synWithGlobalContext();
+        await editTerm(focusTermIndex, {
+            term_exponent: value,
+            scroll_memory_exponent: index,
+        })
     };
     const handleClose = () => {
         setFocusPilot(null);
         handleSetFocusPilot(0);
-    }
-    
+    };
 
     const renderFocusedComponent = () => {
         switch(focusPilot){
@@ -111,13 +119,7 @@ const MagScrollProvider = ({
                 <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorRight className={Styles.ProviderContainerDecorator} /></div>
             </div>
 
-            <p>localCoefficient: {localCoefficient}</p>
-            <p>localVariable: {localVariable}</p>
-            <p>localExponent: {localExponent}</p>
-
-            <p>localScrollMemoryCoefficient: {localScrollMemoryCoefficient}</p>
-            <p>localScrollMemoryVariable: {localScrollMemoryVariable}</p>
-            <p>localScrollMemoryExponent: {localScrollMemoryExponent}</p>
+            <button onClick={() => {syncWithGlobalContext()}}>sync</button>
 
     </> : <p>loading</p>)
 };
