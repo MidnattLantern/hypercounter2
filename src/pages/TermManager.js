@@ -12,7 +12,7 @@ const TermManager = () => {
 const handleCreateTerm = () => {
   const newTerm = {
     term_coefficient: 1,
-    term_variable: "",
+    term_variable: null,
     term_exponent: 1,
     term_index: newTermIndex,
     scroll_memory_coefficient: 3,
@@ -46,7 +46,6 @@ const handleCreateTerm = () => {
 
       {focusTermIndex !== null ? <MagScrollProvider focusTermIndex={focusTermIndex}/> : null}
         
-
     </>)
 };
 

@@ -103,7 +103,7 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
                 <HighLighterAsset className={`${showHighlighter ? Styles.Highlighter : Styles.HideHighlighter}`}/>
             </div>
 
-            {hasLoaded ? <>
+            {hasLoaded ? (<>
 
             <div className={Styles.ScrollContainer}>
 
@@ -127,7 +127,9 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
                 <button className={Styles.LibraryItem}/>
 
                 </div>
-        </> : null}
+        </>) : (<>
+
+            </>)}
         </div>
 
     </>)

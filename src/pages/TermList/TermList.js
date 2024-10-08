@@ -10,7 +10,7 @@ const TermList = ({focusTermIndex, expressionArray, handleCreateTerm, handleSele
       {focusTermIndex !== null ? (<>
         <button className={Styles.TermButton} onClick={() => {handleEraseTerm(focusTermIndex)}}>Erase term</button>
       </>) : (<>
-        <button className={Styles.DisabledTermButton} onClick={() => {}}>---</button>
+        <button className={Styles.DisabledTermButton} onClick={() => {}}>Erase Term</button>
       </>)}
     </>)
   }
@@ -28,18 +28,17 @@ const TermList = ({focusTermIndex, expressionArray, handleCreateTerm, handleSele
           onClick={() =>
           {handleSelectTerm(entity.term_index)}}>
 
-        {entity.term_coefficient}{entity.term_variable}^{entity.term_exponent} | {entity.scroll_memory_coefficient} {entity.scroll_memory_variable} {entity.scroll_memory_exponent}
+        {entity.term_coefficient}{entity.term_variable}^{entity.term_exponent}
 
           </button>
 
         </>))}
 
         <button className={Styles.TermButton} onClick={() => {handleCreateTerm()}}>+ New Term </button>
+        {EraseButton()}
       </table>
-
-      {EraseButton()}
-
     </div>
+
     </>);
 };
 

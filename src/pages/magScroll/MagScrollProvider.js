@@ -104,24 +104,21 @@ const MagScrollProvider = ({
         };
     };
 
-    return(hasLoaded ? <>
+    return(hasLoaded ? <div className={Styles.ProviderContainer}>
 
             <div>
                 <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(1)}}>{localCoefficient}</button>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(2)}}>{localVariable !== ""  ? localVariable : <>-</>}</button>
+                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(2)}}>{localVariable !== null ? localVariable : <>-</>}</button>
                 <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(3)}}>{localExponent}</button>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleClose()}}>Close</button>
             </div>
 
-            <div className={Styles.ProviderContainer}>
-                <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorLeft className={Styles.ProviderContainerDecorator} /></div>
-                    {renderFocusedComponent()}
-                <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorRight className={Styles.ProviderContainerDecorator} /></div>
-            </div>
+        <div className={Styles.WrapFocusedComponent}>
+            <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorLeft className={Styles.ProviderContainerDecorator} /></div>
+            {renderFocusedComponent()}
+            <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorRight className={Styles.ProviderContainerDecorator} /></div>
+        </div>
 
-            <button onClick={() => {syncWithGlobalContext()}}>sync</button>
-
-    </> : <p>loading</p>)
+    </div> : <p>loading</p>)
 };
 
 export default MagScrollProvider;

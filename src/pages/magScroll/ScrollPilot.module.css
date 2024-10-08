@@ -1,10 +1,14 @@
+
 .ProviderContainer{
-    height: 250px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 25px;
+/*    border: 1px solid var(--edge);
+    border-left-width: 3px;
+    border-right-width: 3px;*/
+    margin: 0px;
+    padding: 10px;
 }
 .ProviderContainerDecoratorContainer{
     height: 250px;
@@ -26,11 +30,18 @@
     border: 1px hidden var(--edge);
     border-left-width: 4px;
     border-right-width: 4px;
-    width: 250px;
+    width: 257px;
     height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.WrapFocusedComponent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
 }
 
 /* --- --- */
@@ -39,7 +50,7 @@
     border-left-width: 4px;
     border-right-width: 4px;
     width: 250px;
-    height: 250px;
+    height: 247px;
     overflow-y: scroll;
     overflow-x: hidden;
     transition: height 0.5s ease, border-color 0.5s ease, visibility 0.5s ease;
@@ -99,6 +110,13 @@
     pointer-events: all;
 }
 
+.SelectLibraryContainer{
+    background-color: var(--dark);
+    border: 1px solid var(--edge);
+    border-left-width: 3px;
+    border-right-width: 3px;
+    width: 100%;
+}
 .SelectLibraryButton{
     width: 100px;
     height: 45px;
