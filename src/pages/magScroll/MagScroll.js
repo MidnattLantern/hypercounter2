@@ -1,10 +1,16 @@
+// technologies
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useExpression } from "../../context/ExpressionContext";
+//^
+
+// graphics
 import Styles from "./ScrollPilot.module.css";
 import { ReactComponent as HighLighterAsset } from "../../assets/highlighter.svg";
 import { ReactComponent as ClearIcon} from "../../assets/clear-icon.svg";
-import { useExpression } from "../../context/ExpressionContext";
+//^
 
 const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, setMemoryIndex, library }) => {
+    // states
     const { editTerm } = useExpression();
     const [hasLoaded, setHasLoaded] = useState(false);
     const [showHighlighter, setShowHighlighter] = useState(false);
@@ -13,7 +19,9 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
     const scrollContainerRef = useRef(null);
     const localLibraryItemsRef = useRef([]);
     const [scrollToValue, setScrollToValue] = useState(true);
+    //^
 
+    // handle actions
     const handleSetValue = useCallback((value, index) => {
         const scrollableDiv = document.getElementById((index - 2).toString());
         if (scrollableDiv) {
@@ -42,7 +50,9 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
             });
         };
     }, [handleSetValue, localLibrary]);
+    //^
 
+    // effect
     useEffect(() => {
         if (hasLoaded) {
             setTimeout(() => {
@@ -94,44 +104,53 @@ const MagScroll = ({ globalValue, setGlobalValue, memoryIndex, selectedIndex, se
         localValue,
         scrollToValue,
     ]);
+    //^
 
-    return(<>
-
-        <div ref={scrollContainerRef} className={`${hasLoaded ? Styles.AlignScrollContainer : Styles.LoadingContainer}`}>
-
+    // local components
+    const highlighterComponent = () => {
+        return(<>
             <div className={Styles.HighlighterFrame}>
                 <HighLighterAsset className={`${showHighlighter ? Styles.Highlighter : Styles.HideHighlighter}`}/>
             </div>
+        </>)
+    };
 
+    const libraryItemsComponent = () => {
+        return(<>
+            <button id="-2" className={Styles.LibraryItem}/>
+            <button id="-1" className={Styles.LibraryItem}/>
+            {localLibrary.map((id, index) => (
+                <div
+                key={`${id}-${index}`}
+                id={(index ?? 'null').toString()}
+                ref={(el) => (localLibraryItemsRef.current[index] = el)}
+                >
+                    <button
+                        className={Styles.LibraryItem}
+                        id={index.toString()}
+                        onClick={() => {handleSetValue(id, index)}}
+                    >{id === null ?  <ClearIcon className={Styles.ClearIcon}/> : id}</button>
+                </div>
+            ))}
+            <button className={Styles.LibraryItem}/>
+            <button className={Styles.LibraryItem}/>
+        </>)
+    };
+    //^
+
+    return(<>
+        <div ref={scrollContainerRef} className={`${hasLoaded ? Styles.AlignScrollContainer : Styles.LoadingContainer}`}>
+            {highlighterComponent()}
             {hasLoaded ? (<>
 
-            <div className={Styles.ScrollContainer}>
-
-                <button id="-2" className={Styles.LibraryItem}/>
-                <button id="-1" className={Styles.LibraryItem}/>
-                {localLibrary.map((id, index) => (
-                    <div
-                    key={`${id}-${index}`}
-                    id={(index ?? 'null').toString()}
-                    ref={(el) => (localLibraryItemsRef.current[index] = el)}
-                    >
-                        <button
-                            className={Styles.LibraryItem}
-                            id={index.toString()}
-                            onClick={() => {handleSetValue(id, index)}}
-                        >{id === null ?  <ClearIcon className={Styles.ClearIcon}/> : id}</button>
-                    </div>
-                ))}
-
-                <button className={Styles.LibraryItem}/>
-                <button className={Styles.LibraryItem}/>
-
+                <div className={Styles.ScrollContainer}>
+                    {libraryItemsComponent()}
                 </div>
-        </>) : (<>
+
+            </>) : (<>
 
             </>)}
         </div>
-
     </>)
 };
 

@@ -1,52 +1,60 @@
-.TermListModule{
-/*    background-color: var(--dark);*/
-/*    border: 1px solid var(--edge);*/
+/* foundation */
+.TermListModule {
+    background-color: var(--dark);
+    border: 1px solid var(--edge);
     border-left-width: 3px;
     border-right-width: 3px;
     margin: 0px;
-    padding: 10px;
+    padding: 0px; 
 }
+/* --^-- */
 
+/* TermListTable */
 .TermListTable{
     display: flex;
     flex-direction: row;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: auto;
+    padding: 5px;
 }
+    .TermButton{
+        margin: 7.5px;
+        color: var(--white);
+        min-width: 150px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 20px;
+        font-family: 'Noticia Text';
+    }
 
-.TermButton{
-    margin: 5px;
-    color: var(--white);
-    min-width: 150px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 20px;
-    font-family: 'Noticia Text';
-}
-.DisabledTermButton{
-    margin: 5px;
-    min-width: 150px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: default;
-    font-size: 20px;
-    color: var(--edge);
-    font-family: 'Noticia Text';
-    box-shadow: none;
-}
-.DisabledTermButton:hover{
-    animation: none;
-    box-shadow: none;
-    cursor: default;
-}
-.SelectedTerm,
-.SelectedTerm:hover{
-    color: var(--white-offset);
-    box-shadow: none;
-    animation: none;
-    cursor: default;
-}
+    .SelectedTerm,
+    .SelectedTerm:hover{
+        color: var(--white-offset);
+        box-shadow: none;
+        animation: none;
+        cursor: default;
+    }
+
+    .DisabledTermButton{
+        margin: 7.5px;
+        min-width: 150px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: default;
+        font-size: 20px;
+        color: var(--edge);
+        font-family: 'Noticia Text';
+        box-shadow: none;
+    }
+    .DisabledTermButton:hover{
+        animation: none;
+        box-shadow: none;
+        cursor: default;
+    }
+/* --^-- */

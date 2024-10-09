@@ -9,6 +9,21 @@
   --white-offset: rgb(245, 190, 175);
   --theme-font: 'Ewert', cursive;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+/*::-webkit-scrollbar {
+  margin-top: 5px;
+  background: var(--dark);
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--edge);
+  transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--white-offset);
+}*/
 
 @keyframes button-pulse {
   0% {

@@ -1,14 +1,23 @@
-
+/* MagScrollProvider */
 .ProviderContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-/*    border: 1px solid var(--edge);
-    border-left-width: 3px;
-    border-right-width: 3px;*/
     margin: 0px;
     padding: 10px;
+}
+.SelectLibraryButton{
+    width: 75px;
+    height: 50px;
+    margin: 5px;
+    font-size: 25px;
+}
+.WrapFocusedComponent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
 }
 .ProviderContainerDecoratorContainer{
     height: 250px;
@@ -17,34 +26,9 @@
 .ProviderContainerDecorator{
     fill: var(--dark);
 }
+/* --^-- */
 
-.ClearIcon{
-    fill: var(--white);
-}
-.ClearIcon:hover{
-    fill: var(--theme);
-    cursor: pointer;
-}
-
-.UnselectedContainer{
-    border: 1px hidden var(--edge);
-    border-left-width: 4px;
-    border-right-width: 4px;
-    width: 257px;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.WrapFocusedComponent{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 10px;
-}
-
-/* --- --- */
+/* MagScroll */
 .AlignScrollContainer{
     border: 1px solid var(--white-offset);
     border-left-width: 4px;
@@ -68,6 +52,26 @@
     transition: height 0.5s ease, border-color 0.5s ease, visibility 0.5s ease;
     visibility: hidden;
 }
+
+.HighlighterFrame{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    pointer-events: none;
+    z-index: 9;
+}
+.Highlighter {
+    opacity: 1; /* Fades in */
+    transition: opacity 0.20s ease;
+    visibility: visible;
+    fill: var(--white-offset);
+}
+.HideHighlighter {
+    opacity: 0;
+    transition: opacity 0.20s ease;
+    visibility: hidden;
+}
+
 .ScrollContainer{
     position: relative;
     overflow: visible;
@@ -76,26 +80,6 @@
     align-items: center;
     background-color: var(--void);
 }
-.HighlighterFrame{
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    pointer-events: none;
-    z-index: 9;
-}
-.HideHighlighter {
-    opacity: 0;
-    transition: opacity 0.20s ease;
-    visibility: hidden;
-}
-
-.Highlighter {
-    opacity: 1; /* Fades in */
-    transition: opacity 0.20s ease;
-    visibility: visible;
-    fill: var(--white-offset);
-}
-/* ---^--- */
 
 .LibraryItem{
     width: 50px;
@@ -109,6 +93,28 @@
     justify-content: center;
     pointer-events: all;
 }
+/* --^-- */
+
+.ClearIcon{
+    fill: var(--white);
+}
+.ClearIcon:hover{
+    fill: var(--theme);
+    cursor: pointer;
+}
+
+.UnselectedContainer{
+    border: 1px hidden var(--edge);
+    border-left-width: 4px;
+    border-right-width: 4px;
+    width: 257px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 .SelectLibraryContainer{
     background-color: var(--dark);
@@ -117,13 +123,9 @@
     border-right-width: 3px;
     width: 100%;
 }
-.SelectLibraryButton{
-    width: 100px;
-    height: 45px;
-    margin: 5px;
-}
 
-/* --- --- */
+
+/* depreached
 .StatusBar{
     position: fixed;
     bottom: 0px;
@@ -174,4 +176,4 @@ margin-left: 50px;
     padding-left: 50px;
     border-left: 1.5px solid var(--edge);
 }
-/* ---^--- */
+*/

@@ -1,4 +1,4 @@
-import TermManager from "./pages/TermManager";
+import TermManager from "./pages/TermManager/TermManager";
 
 function App() {
   return (

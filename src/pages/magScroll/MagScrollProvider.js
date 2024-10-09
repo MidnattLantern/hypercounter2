@@ -1,13 +1,23 @@
-import Styles from "./ScrollPilot.module.css";
+// technologies
 import { useEffect, useState } from "react";
-import MagScroll from "./MagScroll";
+import { useExpression } from "../../context/ExpressionContext";
+//^
+
+// graphics
+import Styles from "./ScrollPilot.module.css";
 import { ReactComponent as ProviderDecoratorLeft} from "../../assets/provider-decorator-left.svg";
 import { ReactComponent as ProviderDecoratorRight} from "../../assets/provider-decorator-right.svg";
-import { useExpression } from "../../context/ExpressionContext";
+//^
+
+// components
+import MagScroll from "./MagScroll";
+//^
+
 
 const MagScrollProvider = ({
     focusTermIndex,
 }) => {
+    //states
     const { expressionArray, editTerm } = useExpression();
     const [hasLoaded, setHasLoaded] = useState(false);
     const [localCoefficient, setLocalCoefficient] = useState(null);
@@ -18,9 +28,12 @@ const MagScrollProvider = ({
     const [localScrollMemoryExponent, setLocalScrollMemoryExponent] = useState(2);
     const [focusPilot, setFocusPilot] = useState(null);
     const library1 = [10, 3, 2, 1, 0, -1];
-    const library2 = [null, "♦️", "♥️", "♠️", "♣️"];
+//    const library2 = [null, "♦️", "♥️", "♠️", "♣️"];
+    const library2 = [null, "d", "h", "s", "c"];
     const library3  = [3, 2, 1, -1];
+    //^
 
+    // effect
     useEffect(() => {
         if (!hasLoaded) {
             const handleMount = () => {
@@ -39,7 +52,9 @@ const MagScrollProvider = ({
             handleMount();
         };
     }, [expressionArray, focusTermIndex, hasLoaded]);
+    //^
 
+    // handle actions
     const handleUnselect = () => {
         setFocusPilot(null);
     };
@@ -84,7 +99,9 @@ const MagScrollProvider = ({
         setFocusPilot(null);
         handleSetFocusPilot(0);
     };
+    //^
 
+    // local components
     const renderFocusedComponent = () => {
         switch(focusPilot){
             case 1:
@@ -103,22 +120,31 @@ const MagScrollProvider = ({
                 return <div className={Styles.UnselectedContainer}></div>;
         };
     };
+    const selectorComponent = () => {
+        return(<div>
+            <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(1)}}>{localCoefficient}</button>
+            <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(2)}}>{localVariable !== null ? localVariable : <>-</>}</button>
+            <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(3)}}>{localExponent}</button>
+        </div>)
+    };
 
-    return(hasLoaded ? <div className={Styles.ProviderContainer}>
+    //^
 
-            <div>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(1)}}>{localCoefficient}</button>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(2)}}>{localVariable !== null ? localVariable : <>-</>}</button>
-                <button className={Styles.SelectLibraryButton} onClick={() => {handleSetFocusPilot(3)}}>{localExponent}</button>
+    // complete XTML
+    return(hasLoaded ? (<>
+        <div className={Styles.ProviderContainer}>
+            {selectorComponent()}
+
+            <div className={Styles.WrapFocusedComponent}>
+                <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorLeft className={Styles.ProviderContainerDecorator} /></div>
+                {renderFocusedComponent()}
+                <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorRight className={Styles.ProviderContainerDecorator} /></div>
             </div>
 
-        <div className={Styles.WrapFocusedComponent}>
-            <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorLeft className={Styles.ProviderContainerDecorator} /></div>
-            {renderFocusedComponent()}
-            <div className={Styles.ProviderContainerDecoratorContainer}><ProviderDecoratorRight className={Styles.ProviderContainerDecorator} /></div>
         </div>
-
-    </div> : <p>loading</p>)
+    </>) : (<>
+    
+    </>))
 };
 
 export default MagScrollProvider;
