@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/MidnattLantern/hypercounter2/static/css/main.7a322f4e.css",
-    "main.js": "/MidnattLantern/hypercounter2/static/js/main.cbab96aa.js",
-    "static/js/453.103a6d61.chunk.js": "/MidnattLantern/hypercounter2/static/js/453.103a6d61.chunk.js",
-    "static/media/clear-icon.svg": "/MidnattLantern/hypercounter2/static/media/clear-icon.64d4038c7beb24009418efcab01712eb.svg",
-    "index.html": "/MidnattLantern/hypercounter2/index.html",
-    "static/media/highlighter.svg": "/MidnattLantern/hypercounter2/static/media/highlighter.1d41f943c5df9f9e52e969ea266d0d7d.svg",
-    "static/media/provider-decorator-right.svg": "/MidnattLantern/hypercounter2/static/media/provider-decorator-right.6ae9a2bdc15c4bb45f84d726145eafb2.svg",
-    "static/media/provider-decorator-left.svg": "/MidnattLantern/hypercounter2/static/media/provider-decorator-left.465a029dfb3506e692fd6db930db061b.svg",
-    "main.7a322f4e.css.map": "/MidnattLantern/hypercounter2/static/css/main.7a322f4e.css.map",
-    "main.cbab96aa.js.map": "/MidnattLantern/hypercounter2/static/js/main.cbab96aa.js.map",
-    "453.103a6d61.chunk.js.map": "/MidnattLantern/hypercounter2/static/js/453.103a6d61.chunk.js.map"
+    "main.css": "/hypercounter2/static/css/main.7a322f4e.css",
+    "main.js": "/hypercounter2/static/js/main.474008dd.js",
+    "static/js/453.103a6d61.chunk.js": "/hypercounter2/static/js/453.103a6d61.chunk.js",
+    "static/media/clear-icon.svg": "/hypercounter2/static/media/clear-icon.64d4038c7beb24009418efcab01712eb.svg",
+    "static/media/highlighter.svg": "/hypercounter2/static/media/highlighter.1d41f943c5df9f9e52e969ea266d0d7d.svg",
+    "index.html": "/hypercounter2/index.html",
+    "static/media/provider-decorator-right.svg": "/hypercounter2/static/media/provider-decorator-right.6ae9a2bdc15c4bb45f84d726145eafb2.svg",
+    "static/media/provider-decorator-left.svg": "/hypercounter2/static/media/provider-decorator-left.465a029dfb3506e692fd6db930db061b.svg",
+    "main.7a322f4e.css.map": "/hypercounter2/static/css/main.7a322f4e.css.map",
+    "main.474008dd.js.map": "/hypercounter2/static/js/main.474008dd.js.map",
+    "453.103a6d61.chunk.js.map": "/hypercounter2/static/js/453.103a6d61.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7a322f4e.css",
-    "static/js/main.cbab96aa.js"
+    "static/js/main.474008dd.js"
   ]
 }
