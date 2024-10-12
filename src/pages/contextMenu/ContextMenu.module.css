@@ -1,0 +1,50 @@
+.ContextMenuContainer{
+    max-height: 100px;
+    overflow: scroll;
+    padding: 7.5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.DiverseContextContainer{
+    border-left: 1px solid var(--white-offset);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 345px;
+    height: 85px;
+    opacity: 0.5;
+    margin-left: 10px;
+}
+.TermDataContextContainer{
+    border-left: 1px solid var(--white-offset);
+    border-right: 1px solid var(--white-offset);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 545px;
+    height: 85px;
+    opacity: 0.5;
+}
+.FooterLinksContainer{
+    border-right: 1px solid var(--white-offset);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+    height: 85px;
+    opacity: 0.5;
+    margin-right: 10px;
+}
+
+table{
+    padding: 0px;
+    margin: 0px;
+}
+td{
+    font-size: 12.5px;
+    color: var(--white-offset);
+}
+br{
+    width: 50px;
+}

@@ -1,0 +1,17 @@
+.AppContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.Main {
+    flex-grow: 1; /* Allow the Main section to grow and take up available space */
+    height: auto;
+}
+
+.Context {
+    background-color: var(--dark);
+    height: 100px;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent the footer from shrinking */
+}

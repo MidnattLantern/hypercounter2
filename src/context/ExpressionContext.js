@@ -2,6 +2,7 @@ import React, { createContext, useState, useContext } from 'react';
 
 const ExpressionContext = createContext();
 export const ExpressionProvider = ({ children }) => {
+  const [selectedTermIndex, setSelectedTermIndex] = useState(null);
   const [expressionArray, setExpressionArray] = useState([
 /* The structure of an object:
     {
@@ -36,7 +37,7 @@ export const ExpressionProvider = ({ children }) => {
 
   return (
     <ExpressionContext.Provider
-    value={{ expressionArray, addTerm, editTerm, deleteTerm }}
+    value={{ expressionArray, addTerm, editTerm, deleteTerm, selectedTermIndex, setSelectedTermIndex }}
     >
       {children}
     </ExpressionContext.Provider>

@@ -13,7 +13,7 @@ const TermManager = () => {
   // states
   const newTermIndex = uuidv4();
   const [focusTermIndex, setFocusTermIndex] = useState(null);
-  const { expressionArray, addTerm, deleteTerm } = useExpression();
+  const { expressionArray, addTerm, setSelectedTermIndex, deleteTerm } = useExpression();
   //^
 
   // handle actions
@@ -29,16 +29,19 @@ const TermManager = () => {
     };
     addTerm(newTerm);
     setFocusTermIndex(newTermIndex);
+    setSelectedTermIndex(newTermIndex);
   };
 
   const handleSelectTerm = async(targetIndex) => {
     await setFocusTermIndex(null);
     setFocusTermIndex(targetIndex);
+    setSelectedTermIndex(targetIndex);
   };
 
   const handleEraseTerm = (target) => {
     deleteTerm(target);
     setFocusTermIndex(null);
+    setSelectedTermIndex(null);
   }
   //^
 
