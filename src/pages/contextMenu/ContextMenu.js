@@ -30,10 +30,6 @@ const ContextMenu = () => {
                             <td>Key</td>
                             <td>: {selectedTerm.term_index}</td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                        </tr>
                     </table>
                 </div>
             
@@ -83,26 +79,33 @@ const ContextMenu = () => {
                         </tr>
                     </table>
                 </div>
-                <div className={Styles.FooterLinksContainer}>
+
+            </>) : (<>
+                <div className={Styles.DiverseContextContainer}>
+                    <td>No selected term</td>
+                </div>
+                <div className={Styles.TermDataContextContainer}>
+                    <td>No selected term</td>
+                </div>
+            </>)}
+
+            <div className={Styles.FooterLinksContainer}>
                     <table>
                         <tr>
-                            <td>Github</td>
-                            <td>: <a href="https://github.com/MidnattLantern/hypercounter2" ></a>github.com/hypercounter</td>
+                            <td>Alma Isaksson aka MidnattLantern</td>
+                            <td>- 2024</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td>Website</td>
+                            <td>: <a href="https://midnattlantern.github.io/ali_resume/" target="_blank" rel="noopener noreferrer">midnattlantern.github.io</a></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td>Github repository</td>
+                            <td>: <a href="https://github.com/MidnattLantern/hypercounter2/" target="_blank" rel="noopener noreferrer">github.com/hypercounter</a></td>
                         </tr>
                     </table>
                 </div>
 
-            </>) : (<>
-                <p>No term selected</p>
-            </>)}
         </div>
     </>)
 };

@@ -8,7 +8,7 @@ function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const checkScreenSize = () => {
-    setIsSmallScreen(window.innerWidth > 600);
+    setIsSmallScreen(window.innerWidth > 1330);
   };
 
   useEffect(() => {
